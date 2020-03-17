@@ -18,7 +18,7 @@
 ** afterwhich the b-tree is printed, and in case of the -R option,
 ** directories are handled recursively*/
 
-void		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
+int		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 {
 	struct dirent	*pDirent;
 	struct stat		buf;
@@ -28,7 +28,11 @@ void		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 	char			*path;
 
 	ftree = NULL;
-	pDir = opendir(str);
+	if (!(pDir = opendir(str)))
+	{
+		printf("ft_ls: %s: %s\n", str, strerror(errno));
+		return (-1);
+	}
 	if (count > 1)
 		printf("\n%s:\n", str); //temporary; only works with multiple files/dirs
 	total = 0;
@@ -44,11 +48,12 @@ void		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 	if (flags->l == 1)
 	{	
 		printf("total %llu\n", total); //should not display if dir is empty
-		ft_allign_field(ftree); //ADD FLAGS TO TAKE INTO ACCOUNT ., .. and .files
+		ft_allign_field(ftree, flags); //ADD FLAGS TO TAKE INTO ACCOUNT ., .. and .files
 	}
 	ft_print_tree(ftree, flags);
 	if (flags->R)
 		ft_dirscan_tree(ftree, flags);
+	return (1);
 }
 
 /* Handles the parameters. Creates, appends to and print a b-tree for files.
@@ -57,7 +62,7 @@ void		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 
 void ft_direct(t_file *ptree, t_param *dlst, t_flag *flags, int count)
 {
-    ft_allign_field(ptree);
+    ft_allign_field(ptree, flags);
 	ft_print_tree(ptree, flags);
     ft_param_sort(dlst, flags);
     while (dlst)

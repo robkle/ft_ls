@@ -21,9 +21,9 @@ static void	ft_info_tree(t_file *ftree, char *str, char *path, struct stat buf, 
 	ftree->name = ft_strdup(str);
 	ftree->path = ft_strdup(path);
 	ftree->secs = buf.st_mtime;
+	ftree->mode = ft_mode(ft_itoa_base(buf.st_mode, 8));
 	if (flags->l == 1)
 	{
-		ftree->mode = ft_mode(ft_itoa_base(buf.st_mode, 8));
 		if (ftree->mode[0] == 'l')
 		{
 			buf_size = 256;
@@ -47,7 +47,7 @@ static void	ft_info_tree(t_file *ftree, char *str, char *path, struct stat buf, 
 ** specific position in the tree is send to ft_info_tree to add info required by
 ** the -l option.*/
 
-void	ft_insert_tree(t_file **ftree, char	*str, char *path, t_flag *flags, struct stat buf)
+void	ft_insert_tree(t_file **ftree, char *str, char *path, t_flag *flags, struct stat buf)
 {
 	int			cmp;
 
@@ -124,9 +124,7 @@ void	ft_dirscan_tree(t_file *ftree, t_flag *flags)
 		{
 			if (ft_strcmp(ftree->name, ".")  != 0 && ft_strcmp(ftree->name, "..") != 0)
 			{
-				if (flags->a == 1 && ftree->name[0] == '.')
-					ft_read_dir(ftree->path, flags, 2);
-				else if (ftree->name[0] != '.')
+				if (flags->a == 1 || (flags->a == 0 && ftree->name[0] != '.'))
 					ft_read_dir(ftree->path, flags, 2);
 			}
 		}

@@ -11,6 +11,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <uuid/uuid.h>
+#include <errno.h>
 #include "../Projects/libft/libft.h" //TEMPORARY PATH
 
 typedef struct	s_flag
@@ -59,13 +60,13 @@ char 	*ft_itoa_base(uintmax_t value, int base);
 void    ft_insert_tree(t_file **ftree, char *str, char *path, t_flag *flags, struct stat buf);
 void	ft_print_tree(t_file *ftree, t_flag *flags);
 int  	ft_seccmp(time_t a, time_t b);
-void	ft_read_dir(char *str, t_flag *flags, int count);
+int	ft_read_dir(char *str, t_flag *flags, int count);
 void	ft_dirscan_tree(t_file *ftree, t_flag *flags);
 void 	ft_direct(t_file *ptree, t_param *dlst, t_flag *flags, int count);
 char    *ft_mode(char *mode);
 char    *ft_date(time_t secs);
 char	*ft_path(char *path, char *file);
-void    ft_allign_field(t_file *ftree);
+void    ft_allign_field(t_file *ftree, t_flag *flags);
 char    *ft_user(uid_t st_uid);
 char    *ft_group(gid_t st_gid);
 char    *ft_sl_path(char *path);
