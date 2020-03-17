@@ -13,22 +13,25 @@
 #include "ft_ls.h"
 #include <stdio.h>
 
-static void	ft_scan_len(t_file *ftree, int *len)
+static void	ft_scan_len(t_file *ftree, t_flag *flags, int *len)
 {
 	int	tmp;
 
 	if (ftree)
 	{
-		ft_scan_len(ftree->left, len);
-		tmp = ft_strlen(ftree->links);
-		len[0] = tmp > len[0] ? tmp : len[0];
-		tmp = ft_strlen(ftree->user);
-		len[1] = tmp > len[1] ? tmp : len[1];
-		tmp = ft_strlen(ftree->group);
-		len[2] = tmp > len[2] ? tmp : len[2];
-		tmp = ft_strlen(ftree->bytes);
-		len[3] = tmp > len[3] ? tmp : len[3];
-		ft_scan_len(ftree->right, len);
+		ft_scan_len(ftree->left, flags, len);
+		if (flags->a == 1 || (flags->a == 0 && ftree->name[0] != '.'))
+		{
+			tmp = ft_strlen(ftree->links);
+			len[0] = tmp > len[0] ? tmp : len[0];
+			tmp = ft_strlen(ftree->user);
+			len[1] = tmp > len[1] ? tmp : len[1];
+			tmp = ft_strlen(ftree->group);
+			len[2] = tmp > len[2] ? tmp : len[2];
+			tmp = ft_strlen(ftree->bytes);
+			len[3] = tmp > len[3] ? tmp : len[3];
+		}
+		ft_scan_len(ftree->right, flags, len);
 	}
 }
 
@@ -100,7 +103,7 @@ static void	ft_space_pad(t_file *ftree, int *len)
 	}
 }*/
 
-void	ft_allign_field(t_file *ftree)
+void	ft_allign_field(t_file *ftree, t_flag *flags)
 {
 	int	len[4];
 
@@ -109,6 +112,6 @@ void	ft_allign_field(t_file *ftree)
 	len[2] = 0;
 	len[3] = 0;
 
-	ft_scan_len(ftree, len);
+	ft_scan_len(ftree, flags, len);
 	ft_space_pad(ftree, len);
 }
