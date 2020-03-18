@@ -34,7 +34,7 @@ int		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 		return (-1);
 	}
 	if (count > 1)
-		printf("\n%s:\n", str); //temporary; only works with multiple files/dirs
+		printf("%s:\n", str);
 	total = 0;
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
@@ -47,8 +47,9 @@ int		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 	closedir (pDir);
 	if (flags->l == 1)
 	{	
-		printf("total %llu\n", total); //should not display if dir is empty
-		ft_allign_field(ftree, flags); //ADD FLAGS TO TAKE INTO ACCOUNT ., .. and .files
+		if (total != 0)
+			printf("total %llu\n", total);
+		ft_allign_field(ftree, flags);
 	}
 	ft_print_tree(ftree, flags);
 	if (flags->R)
@@ -62,14 +63,17 @@ int		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 
 void ft_direct(t_file *ptree, t_param *dlst, t_flag *flags, int count)
 {
-    ft_allign_field(ptree, flags);
+	ft_allign_field(ptree, flags);
 	ft_print_tree(ptree, flags);
-    ft_param_sort(dlst, flags);
-    while (dlst)
-    {
-        ft_read_dir(dlst->name, flags, count);
-        dlst = dlst->next;
-    }
+	if (ptree && count > 1)
+		write(1, "\n", 1);
+	ft_param_sort(dlst, flags);
+	while (dlst)
+	{
+		ft_read_dir(dlst->name, flags, count);
+		if ((dlst = dlst->next) != NULL)
+			write(1, "\n", 1);
+	}
     //free dlst
 }
 
@@ -89,15 +93,15 @@ void    ft_ls(int ac, char **av, int i, t_flag *flags)
     while (i < ac)
     {
         if (lstat(av[i], &buf) == -1)
-			printf("ft_ls: %s: No such file or directory\n", av[i]);
-		else
-		{
-			type = ft_type(ft_itoa_base(buf.st_mode, 8));
-            if (type == 'd')
-            	dlst = ft_dir_list(dlst, av[i], buf.st_mtime);
+		printf("ft_ls: %s: %s\n", av[i], strerror(errno));
+	else
+	{
+		type = ft_type(ft_itoa_base(buf.st_mode, 8));
+            	if (type == 'd')
+            		dlst = ft_dir_list(dlst, av[i], buf.st_mtime);
         	else
-				ft_insert_tree(&ptree, av[i], av[i], flags, buf);
-		}
+			ft_insert_tree(&ptree, av[i], av[i], flags, buf);
+	}
         count++;
         i++;
     }
