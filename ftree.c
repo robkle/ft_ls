@@ -33,7 +33,6 @@ static void	ft_info_tree(t_file *ftree, char *str, char *path, struct stat buf, 
 		}
 		else
 			ftree->sl_path = NULL;
-		//ftree->bytes = ft_itoa(buf.st_size);
 		ft_bytes(ftree, buf);
 		ftree->links = ft_itoa(buf.st_nlink);
 		ftree->user = ft_user(buf.st_uid);
@@ -81,8 +80,8 @@ static void	ft_print_files(t_file *ftree, t_flag *flags)
 	{
 		printf("%s ", ftree->mode);
 		printf("%s ", ftree->links);
-		printf("%s ", ftree->user);
-		printf(" %s ", ftree->group);
+		printf("%s  ", ftree->user);
+		printf("%s  ", ftree->group);
 		printf("%s ", ftree->bytes);
 		date = ft_date(ftree->secs);
 		printf("%s ", date);
@@ -125,7 +124,10 @@ void	ft_dirscan_tree(t_file *ftree, t_flag *flags)
 			if (ft_strcmp(ftree->name, ".")  != 0 && ft_strcmp(ftree->name, "..") != 0)
 			{
 				if (flags->a == 1 || (flags->a == 0 && ftree->name[0] != '.'))
+				{
+					write(1, "\n", 1);
 					ft_read_dir(ftree->path, flags, 2);
+				}
 			}
 		}
 		ft_dirscan_tree(ftree->right, flags);
