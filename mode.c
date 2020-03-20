@@ -68,6 +68,16 @@ static void	ft_permissions(char *perm, char *mode)
 	}
 }
 
+static void	ft_set_perm(char *perm, char m)
+{
+	if (m == '4' || m == '5' || m == '6' || m == '7')
+		perm[2] = (perm[2] == '-') ? 'S' : 's';
+	if (m == '2' || m == '3' || m == '6' || m == '7')
+		perm[5] = (perm[5] == '-') ? 'S' : 's';
+	if (m == '1' || m == '3' || m == '5' || m == '7')
+		perm[8] = (perm[8] == '-') ? 'T' : 't';
+}
+
 char	*ft_mode(char *mode)
 {
 	char		*perm;
@@ -75,6 +85,7 @@ char	*ft_mode(char *mode)
 	perm = ft_strnew(12);
 	perm[0] = ft_type(mode);
 	ft_permissions(perm, mode);
+	ft_set_perm(perm, mode[ft_strlen(mode) - 4]);
 	perm[10] = ' '; //temporary: reserved for @ and +;
 	perm[11] = '\0';
 	return (perm);
