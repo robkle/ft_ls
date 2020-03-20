@@ -1,1 +1,0 @@
-gcc main.c flags.c params.c ft_ls.c misc.c mode.c ftree.c date.c allign.c ids.c bytes.c ft_ls.h ../Projects/libft/libft.h ../Projects/libft/libft.a

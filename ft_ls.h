@@ -12,7 +12,7 @@
 #include <grp.h>
 #include <uuid/uuid.h>
 #include <errno.h>
-#include "../Projects/libft/libft.h" //TEMPORARY PATH
+#include "libft/libft.h"
 
 typedef struct	s_flag
 {
@@ -56,7 +56,7 @@ void    ft_ls(int ac, char **av, int i, t_flag *flags);
 void    *ft_param_sort(t_param *param, t_flag *flags);
 t_param	*ft_dir_list(t_param *dlst, char *str, time_t secs);
 char 	ft_type(char *type);
-char 	*ft_itoa_base(uintmax_t value, int base);
+//char 	*ft_itoa_base(uintmax_t value, int base);
 void    ft_insert_tree(t_file **ftree, char *str, char *path, t_flag *flags, struct stat buf);
 void	ft_print_tree(t_file *ftree, t_flag *flags);
 int  	ft_seccmp(time_t a, time_t b);
@@ -71,5 +71,5 @@ char    *ft_user(uid_t st_uid);
 char    *ft_group(gid_t st_gid);
 char    *ft_sl_path(char *path);
 void    ft_bytes(t_file *ftree, struct stat buf);
-char    *ft_strmake(char c, int size); //TMP until ft_printf
+//char    *ft_strmake(char c, int size); //TMP until ft_printf
 #endif

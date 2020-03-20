@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 static void	ft_info_tree(t_file *ftree, char *str, char *path, struct stat buf, t_flag *flags)
 {
@@ -29,7 +28,6 @@ static void	ft_info_tree(t_file *ftree, char *str, char *path, struct stat buf, 
 			buf_size = 256;
 			readlink(ftree->path, sl_buf, buf_size);
 			ftree->sl_path = ft_sl_path(sl_buf);
-			printf("%s\n", ftree->sl_path);
 		}
 		else
 			ftree->sl_path = NULL;
@@ -78,21 +76,21 @@ static void	ft_print_files(t_file *ftree, t_flag *flags)
 
 	if (flags->l == 1)
 	{
-		printf("%s ", ftree->mode);
-		printf("%s ", ftree->links);
-		printf("%s  ", ftree->user);
-		printf("%s  ", ftree->group);
-		printf("%s ", ftree->bytes);
+		ft_printf("%s ", ftree->mode);
+		ft_printf("%s ", ftree->links);
+		ft_printf("%s  ", ftree->user);
+		ft_printf("%s  ", ftree->group);
+		ft_printf("%s ", ftree->bytes);
 		date = ft_date(ftree->secs);
-		printf("%s ", date);
+		ft_printf("%s ", date);
 	//	free(date);
 		if (ftree->sl_path)
-			printf("%s %s\n",ftree->name, ftree->sl_path);
+			ft_printf("%s %s\n",ftree->name, ftree->sl_path);
 		else
-			printf("%s\n", ftree->name);
+			ft_printf("%s\n", ftree->name);
 	}
 	else
-		printf("%s\n", ftree->name);
+		ft_printf("%s\n", ftree->name);
 }
 
 /* Navigates through the b-tree and sends each file to ft_print_files to be 

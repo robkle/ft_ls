@@ -12,7 +12,7 @@
 
 #include "ft_ls.h"
 
-char *ft_itoa_base(uintmax_t value, int base)
+/*char *ft_itoa_base(uintmax_t value, int base) //part of ft_printf in libft
 {
     char        *base_char;
     char        *str;
@@ -33,7 +33,7 @@ char *ft_itoa_base(uintmax_t value, int base)
         value /= base;
     }
     return (str);
-}
+}*/
 
 int  ft_seccmp(time_t a, time_t b)
 {
@@ -63,4 +63,3 @@ char	*ft_sl_path(char *path)
 	arrow = ft_strdup("-> ");
 	return(ft_strjoin(arrow, path));
 }
-

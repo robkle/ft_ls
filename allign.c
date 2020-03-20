@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 static void	ft_scan_len(t_file *ftree, t_flag *flags, int *len)
 {
@@ -35,7 +34,7 @@ static void	ft_scan_len(t_file *ftree, t_flag *flags, int *len)
 	}
 }
 
-char	*ft_strmake(char c, int size) //TEMPORARY; until ft_printf files are added
+/*char	*ft_strmake(char c, int size) //TEMPORARY; until ft_printf files are added
 {
 	char	*s;
 	int		i;
@@ -48,7 +47,7 @@ char	*ft_strmake(char c, int size) //TEMPORARY; until ft_printf files are added
 		s[i++] = c;
 	s[i] = '\0';
 	return (s);
-}
+}*/
 
 static void	ft_create_pad(char **str, int len, char c)
 {
@@ -62,16 +61,16 @@ static void	ft_create_pad(char **str, int len, char c)
 	*str = tmp2;
 }
 
-static void	ft_space_pad(t_file *ftree, int *len)
+static void	ft_space_allign(t_file *ftree, int *len)
 {
 	if (ftree)
 	{
-		ft_space_pad(ftree->left, len);
+		ft_space_allign(ftree->left, len);
 		ft_create_pad(&ftree->links, len[0], 'f');
 		ft_create_pad(&ftree->user, len[1], 'b');
 		ft_create_pad(&ftree->group, len[2], 'b');
 		ft_create_pad(&ftree->bytes, len[3], 'f');
-		ft_space_pad(ftree->right, len);
+		ft_space_allign(ftree->right, len);
 	}
 }
 
@@ -113,5 +112,5 @@ void	ft_allign_field(t_file *ftree, t_flag *flags)
 	len[3] = 0;
 
 	ft_scan_len(ftree, flags, len);
-	ft_space_pad(ftree, len);
+	ft_space_allign(ftree, len);
 }

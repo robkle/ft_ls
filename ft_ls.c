@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h> //TEMP
 
 /* Opens and reads directories. The contents of directories is send to a 
 ** ft_insert_tree (a function for creating and appending to a b-tree),
@@ -30,11 +29,11 @@ int		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 	ftree = NULL;
 	if (!(pDir = opendir(str)))
 	{
-		printf("ft_ls: %s: %s\n", str, strerror(errno));
+		ft_printf("ft_ls: %s: %s\n", str, strerror(errno));
 		return (-1);
 	}
 	if (count > 1)
-		printf("%s:\n", str);
+		ft_printf("%s:\n", str);
 	total = 0;
 	while ((pDirent = readdir(pDir)) != NULL)
 	{
@@ -48,7 +47,7 @@ int		ft_read_dir(char *str, t_flag *flags, int count) //STATIC FOR NOW
 	if (flags->l == 1)
 	{	
 		if (total != 0)
-			printf("total %llu\n", total);
+			ft_printf("total %llu\n", total);
 		ft_allign_field(ftree, flags);
 	}
 	ft_print_tree(ftree, flags);
@@ -93,7 +92,7 @@ void    ft_ls(int ac, char **av, int i, t_flag *flags)
     while (i < ac)
     {
         if (lstat(av[i], &buf) == -1)
-		printf("ft_ls: %s: %s\n", av[i], strerror(errno));
+		ft_printf("ft_ls: %s: %s\n", av[i], strerror(errno));
 	else
 	{
 		type = ft_type(ft_itoa_base(buf.st_mode, 8));
