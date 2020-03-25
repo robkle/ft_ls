@@ -12,28 +12,8 @@
 
 #include "ft_ls.h"
 
-/*char *ft_itoa_base(uintmax_t value, int base) //part of ft_printf in libft
-{
-    char        *base_char;
-    char        *str;
-    uintmax_t   tmp;
-    int         len;
-
-    base_char = "0123456789abcdef";
-    tmp = value;
-    len = 1;
-    while (tmp /= base)
-        len++;
-    if (!(str = (char*)malloc(sizeof(char) * (len + 1))))
-        return (NULL);
-    str[len] = '\0';
-    while (len-- > 0)
-    {
-        str[len] = base_char[value % base];
-        value /= base;
-    }
-    return (str);
-}*/
+/* The ft_seccmp fucntion is called in the case of the -t option flag. 
+** It compares the time of last modification of files. */ 
 
 int  ft_seccmp(time_t a, time_t b)
 {
@@ -44,6 +24,9 @@ int  ft_seccmp(time_t a, time_t b)
 	else
 		return (0);
 }
+
+/* The ft_path function creates a string of the relative path, which is needed
+** when files are listed recursively (-R option flag). */
 
 char	*ft_path(char *path, char *file)
 {
@@ -56,10 +39,13 @@ char	*ft_path(char *path, char *file)
 	return (str);
 }
 
+/* The ft_sl_path creates a string of the path of a symbolic link, which is
+** displayed in the long format (-l option flag), after the file name*/
+
 char	*ft_sl_path(char *path)
 {
-	char	*arrow;
+	char	*sl_path;
 
-	arrow = ft_strdup("-> ");
-	return(ft_strjoin(arrow, path));
+	sl_path = ft_strjoin("-> ", path);
+	return (sl_path);
 }

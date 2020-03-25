@@ -12,6 +12,10 @@
 
 #include "ft_ls.h"
 
+/* This function retrieves file information needed for sorting and reading 
+** directories recursively. In case of the -l option flag, it retrieves file-
+** information for the long format output.*/
+
 static void	ft_info_tree(t_file *ftree, char *str, char *path, struct stat buf, t_flag *flags)
 {
 	char	sl_buf[256];
@@ -70,6 +74,9 @@ void	ft_insert_tree(t_file **ftree, char *str, char *path, t_flag *flags, struct
 	}
 }
 
+/* This function receives individual links of the binary tree from ft_print_tree
+** and prints out the required information */
+
 static void	ft_print_files(t_file *ftree, t_flag *flags)
 {
 	char	*date;
@@ -83,7 +90,7 @@ static void	ft_print_files(t_file *ftree, t_flag *flags)
 		ft_printf("%s ", ftree->bytes);
 		date = ft_date(ftree->secs);
 		ft_printf("%s ", date);
-	//	free(date);
+		free(date);
 		if (ftree->sl_path)
 			ft_printf("%s %s\n",ftree->name, ftree->sl_path);
 		else
@@ -110,7 +117,7 @@ void	ft_print_tree(t_file *ftree, t_flag *flags)
 }
 
 /* Only used for the -R (recursive) option. Searches thee b-tree for directories
-** and sends each one  back to the ft_read_dir function.*/
+** and sends each one  back to the ft_open_dir function.*/
 
 void	ft_dirscan_tree(t_file *ftree, t_flag *flags)
 {
@@ -124,11 +131,10 @@ void	ft_dirscan_tree(t_file *ftree, t_flag *flags)
 				if (flags->a == 1 || (flags->a == 0 && ftree->name[0] != '.'))
 				{
 					write(1, "\n", 1);
-					ft_read_dir(ftree->path, flags, 2);
+					ft_open_dir(ftree->path, flags, 2);
 				}
 			}
 		}
 		ft_dirscan_tree(ftree->right, flags);
 	}
 }
-

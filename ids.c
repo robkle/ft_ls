@@ -12,6 +12,8 @@
 
 #include "ft_ls.h"
 
+/*Functions to retrieve the user and group ids*/
+
 char	*ft_user(uid_t st_uid)
 {
 	struct passwd	*u;

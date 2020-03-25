@@ -12,6 +12,11 @@
 
 #include "ft_ls.h"
 
+/* This function creates a string with the correct format of the date of the
+** last modification. If the modification time of the file is more than
+** 6 months in the past or future, then the year of the last modification is
+** displayed else instead of the hour and minutes */
+
 char	*ft_date(time_t secs)
 {
 	time_t	begin_sec;

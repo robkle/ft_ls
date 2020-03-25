@@ -12,6 +12,13 @@
 
 #include "ft_ls.h"
 
+/* Functions to allign the text in the long format (-l), by creating spacepads.
+** First the length of the spacepad is determined with ft_scan_len, recursively
+** going through the binary tree, finding the longest string in each column. 
+** The function ft_space_allign goes through the binary tree recursively 
+** adding a spacepad through the ft_create_pad function, adding padding to the
+** front or back ('f' or 'b')*/
+
 static void	ft_scan_len(t_file *ftree, t_flag *flags, int *len)
 {
 	int	tmp;
@@ -33,21 +40,6 @@ static void	ft_scan_len(t_file *ftree, t_flag *flags, int *len)
 		ft_scan_len(ftree->right, flags, len);
 	}
 }
-
-/*char	*ft_strmake(char c, int size) //TEMPORARY; until ft_printf files are added
-{
-	char	*s;
-	int		i;
-
-	size = size < 0 ? 0 : size;
-	if (!(s = (char*)malloc(sizeof(*s) * (size + 1))))
-		return (NULL);
-	i = 0;
-	while (i < size)
-		s[i++] = c;
-	s[i] = '\0';
-	return (s);
-}*/
 
 static void	ft_create_pad(char **str, int len, char c)
 {
@@ -73,34 +65,6 @@ static void	ft_space_allign(t_file *ftree, int *len)
 		ft_space_allign(ftree->right, len);
 	}
 }
-
-/*static void	ft_space_pad(t_file *ftree, int len, char c)
-{
-	char	*tmp1;
-	char	*tmp2;
-
-	if (ftree)
-	{
-		ft_space_pad(ftree->left, len, c);
-		if (c == 'b')
-		{
-			tmp1 = ft_strmake(' ', len - ft_strlen(ftree->bytes));
-			tmp2 = ft_strjoin(tmp1, ftree->bytes);
-			free(ftree->bytes);
-			free(tmp1);
-			ftree->bytes = tmp2;
-		}
-		else if (c == 'l')
-		{
-			tmp1 = ft_strmake(' ', len - ft_strlen(ftree->links));
-			tmp2 = ft_strjoin(tmp1, ftree->links);
-			free(ftree->links);
-			free(tmp1);
-			ftree->links = tmp2;
-		}
-		ft_space_pad(ftree->right, len, c);
-	}
-}*/
 
 void	ft_allign_field(t_file *ftree, t_flag *flags)
 {

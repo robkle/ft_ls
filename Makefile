@@ -3,10 +3,10 @@ NAME = ft_ls
 FLAGS = -Wall -Wextra -Werror
 
 SRC = allign.c bytes.c date.c flags.c ft_ls.c ftree.c ids.c main.c misc.c \
-	mode.c params.c
+	mode.c params.c free.c
 
 OBJ = allign.o bytes.o date.o flags.o ft_ls.o ftree.o ids.o main.o misc.o \
-	mode.o params.o
+	mode.o params.o free.o
 
 INC = ./
 
