@@ -6,13 +6,15 @@
 /*   By: rklein <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 16:19:33 by rklein            #+#    #+#             */
-/*   Updated: 2020/03/10 16:44:02 by rklein           ###   ########.fr       */
+/*   Updated: 2020/06/05 12:38:02 by rklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/*Functions to retrieve the user and group ids*/
+/*
+** Functions to retrieve the user and group ids
+*/
 
 char	*ft_user(uid_t st_uid)
 {

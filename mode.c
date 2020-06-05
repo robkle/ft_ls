@@ -3,48 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   mode.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rklein <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rklein <rklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:15:11 by rklein            #+#    #+#             */
-/*   Updated: 2020/03/10 14:44:30 by rklein           ###   ########.fr       */
+/*   Updated: 2020/06/05 11:46:59 by rklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char ft_type(char *type)
+char		ft_type(char *type)
 {
-    char c;
+	char	c;
 
-    if (ft_strlen(type) == 5)
-    {
-        if (type[0] == '4')
-            c = 'd';
-        else if (type[0] == '2')
-            c = 'c';
-        else if (type[0] == '6')
-            c = 'b';
-        else
-            c = 'p';
-    }
-    else
-    {
-        if (type[1] == '0')
-            c = '-';
-        else if (type[1] == '2')
-            c = 'l';
-        else
-            c = 's';
-    }
-    free(type);
-    return (c);
+	if (ft_strlen(type) == 5)
+	{
+		if (type[0] == '4')
+			c = 'd';
+		else if (type[0] == '2')
+			c = 'c';
+		else if (type[0] == '6')
+			c = 'b';
+		else
+			c = 'p';
+	}
+	else
+	{
+		if (type[1] == '0')
+			c = '-';
+		else if (type[1] == '2')
+			c = 'l';
+		else
+			c = 's';
+	}
+	free(type);
+	return (c);
 }
 
 static void	ft_permissions(char *perm, char *mode)
 {
 	int	len;
-	int i;
-	
+	int	i;
+
 	len = ft_strlen(mode);
 	i = 4;
 	while (--i >= 0)
@@ -78,7 +78,7 @@ static void	ft_set_perm(char *perm, char m)
 		perm[8] = (perm[8] == '-') ? 'T' : 't';
 }
 
-char	*ft_mode(char *mode)
+char		*ft_mode(char *mode)
 {
 	char		*perm;
 
@@ -86,7 +86,7 @@ char	*ft_mode(char *mode)
 	perm[0] = ft_type(mode);
 	ft_permissions(perm, mode);
 	ft_set_perm(perm, mode[ft_strlen(mode) - 4]);
-	perm[10] = ' '; //temporary: reserved for @ and +;
+	perm[10] = ' ';
 	perm[11] = '\0';
 	return (perm);
 }

@@ -6,18 +6,20 @@
 /*   By: rklein <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 14:44:59 by rklein            #+#    #+#             */
-/*   Updated: 2020/03/12 14:47:54 by rklein           ###   ########.fr       */
+/*   Updated: 2020/06/05 12:32:15 by rklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/* Functions to allign the text in the long format (-l), by creating spacepads.
+/*
+** Functions to allign the text in the long format (-l), by creating spacepads.
 ** First the length of the spacepad is determined with ft_scan_len, recursively
-** going through the binary tree, finding the longest string in each column. 
-** The function ft_space_allign goes through the binary tree recursively 
+** going through the binary tree, finding the longest string in each column.
+** The function ft_space_allign goes through the binary tree recursively
 ** adding a spacepad through the ft_create_pad function, adding padding to the
-** front or back ('f' or 'b')*/
+** front or back ('f' or 'b')
+*/
 
 static void	ft_scan_len(t_file *ftree, t_flag *flags, int *len)
 {
@@ -66,7 +68,7 @@ static void	ft_space_allign(t_file *ftree, int *len)
 	}
 }
 
-void	ft_allign_field(t_file *ftree, t_flag *flags)
+void		ft_allign_field(t_file *ftree, t_flag *flags)
 {
 	int	len[4];
 
@@ -74,7 +76,6 @@ void	ft_allign_field(t_file *ftree, t_flag *flags)
 	len[1] = 0;
 	len[2] = 0;
 	len[3] = 0;
-
 	ft_scan_len(ftree, flags, len);
 	ft_space_allign(ftree, len);
 }

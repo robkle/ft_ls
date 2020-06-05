@@ -6,16 +6,18 @@
 /*   By: rklein <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 11:22:11 by rklein            #+#    #+#             */
-/*   Updated: 2020/03/10 14:44:12 by rklein           ###   ########.fr       */
+/*   Updated: 2020/06/05 12:35:46 by rklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/* This function creates a string with the correct format of the date of the
+/*
+** This function creates a string with the correct format of the date of the
 ** last modification. If the modification time of the file is more than
 ** 6 months in the past or future, then the year of the last modification is
-** displayed else instead of the hour and minutes */
+** displayed else instead of the hour and minutes
+*/
 
 char	*ft_date(time_t secs)
 {
@@ -37,4 +39,3 @@ char	*ft_date(time_t secs)
 	free(d2);
 	return (date);
 }
-

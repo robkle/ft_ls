@@ -6,15 +6,17 @@
 /*   By: rklein <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 13:57:21 by rklein            #+#    #+#             */
-/*   Updated: 2020/03/12 14:48:02 by rklein           ###   ########.fr       */
+/*   Updated: 2020/06/05 12:37:17 by rklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-/* Functions to retrieve the file size, or the major and minor device numbers
+/*
+** Functions to retrieve the file size, or the major and minor device numbers
 ** in the case of block files and character files. These functions are only
-** called in the case of the -l option flag (i.e. long format)*/
+** called in the case of the -l option flag (i.e. long format)
+*/
 
 static void	ft_device(t_file *ftree, struct stat buf)
 {
@@ -41,9 +43,8 @@ static void	ft_device(t_file *ftree, struct stat buf)
 	free(dn_str[1]);
 }
 
-void	ft_bytes(t_file *ftree, struct stat buf)
+void		ft_bytes(t_file *ftree, struct stat buf)
 {
-
 	if (ftree->mode[0] == 'b' || ftree->mode[0] == 'c')
 		ft_device(ftree, buf);
 	else

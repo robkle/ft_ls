@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   params.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rklein <rklein@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/05 11:49:20 by rklein            #+#    #+#             */
+/*   Updated: 2020/06/05 12:00:51 by rklein           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-/* Functions to sort a linked list of directories given as input, 
-** lexicographically or chronologically depending on the given
-** option*/
+/*
+** Functions to sort a linked list of directories given as input,
+** lexicographically or chronologically depending on the given option
+*/
 
 static void		ft_swap(t_param *param, t_param *temp)
 {
@@ -17,9 +30,9 @@ static void		ft_swap(t_param *param, t_param *temp)
 	temp->secs = tmp_sec;
 }
 
-static	t_param	*ft_data_sort(t_param *param, t_flag *flags, char sort)
+static t_param	*ft_data_sort(t_param *param, t_flag *flags, char sort)
 {
-	t_param 			*begin;
+	t_param				*begin;
 	t_param				*tmp_param;
 	int					cmp;
 
@@ -42,7 +55,7 @@ static	t_param	*ft_data_sort(t_param *param, t_flag *flags, char sort)
 	return (begin);
 }
 
-void	*ft_param_sort(t_param *param, t_flag *flags)
+void			*ft_param_sort(t_param *param, t_flag *flags)
 {
 	t_param	*begin;
 	t_param *tmp;
@@ -57,21 +70,23 @@ void	*ft_param_sort(t_param *param, t_flag *flags)
 	return (begin);
 }
 
-/* Functions to create and appending to a linked list of the directories given 
-** as parameters*/ 
+/*
+** Functions to create and appending to a linked list of the directories given
+** as parameters
+*/
 
-static void	ft_add_list(t_param *dlst, char *str, time_t secs)
+static void		ft_add_list(t_param *dlst, char *str, time_t secs)
 {
 	dlst->name = ft_strdup(str);
 	dlst->secs = secs;
 	dlst->next = NULL;
 }
-	
-t_param	*ft_dir_list(t_param *dlst, char *str, time_t secs)
+
+t_param			*ft_dir_list(t_param *dlst, char *str, time_t secs)
 {
-	t_param *tmp;
+	t_param	*tmp;
 	t_param	*begin;
-	
+
 	if (dlst == NULL)
 	{
 		dlst = malloc(sizeof(t_param));

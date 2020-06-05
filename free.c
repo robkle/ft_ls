@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rklein <rklein@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/05 12:32:53 by rklein            #+#    #+#             */
+/*   Updated: 2020/06/05 12:34:55 by rklein           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 static void	ft_free_node(t_file *ftree, t_flag *flags)
@@ -16,10 +28,10 @@ static void	ft_free_node(t_file *ftree, t_flag *flags)
 	}
 }
 
-void	ft_free_tree(t_file *ftree, t_flag *flags)
+void		ft_free_tree(t_file *ftree, t_flag *flags)
 {
 	if (ftree == NULL)
-		return;
+		return ;
 	ft_free_tree(ftree->left, flags);
 	ft_free_tree(ftree->right, flags);
 	ft_free_node(ftree, flags);
@@ -27,10 +39,10 @@ void	ft_free_tree(t_file *ftree, t_flag *flags)
 	ftree = NULL;
 }
 
-void	ft_free_list(t_param *list)
+void		ft_free_list(t_param *list)
 {
 	t_param	*tmp;
-	
+
 	while (list != NULL)
 	{
 		tmp = list->next;

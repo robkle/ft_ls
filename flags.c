@@ -1,19 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   flags.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rklein <rklein@student.hive.fi>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/05 12:38:15 by rklein            #+#    #+#             */
+/*   Updated: 2020/06/05 12:41:03 by rklein           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
-/* Functions that takes the input parameters and create a struct
+/*
+** Functions that takes the input parameters and create a struct
 ** with a _Bool variable for each option flag. In this project only
-** -Ralrt are handled, anything is else is conidered an illegal 
-** option, and gives error and usage messages. */
+** -Ralrt are handled, anything is else is conidered an illegal
+** option, and gives error and usage messages.
+*/
 
 static int	ft_noflag(char c)
 {
 	write(1, "ft_ls: illegal option -- ", 25);
 	write(1, &c, 1);
-	write(1, "\nusage: ft_ls [-Ralrt] [file ...]\n", 34); 	
+	write(1, "\nusage: ft_ls [-Ralrt] [file ...]\n", 34);
 	return (-1);
 }
 
-static int	ft_isflag(char c, char	*ref)
+static int	ft_isflag(char c, char *ref)
 {
 	while (*ref)
 	{
@@ -24,7 +38,7 @@ static int	ft_isflag(char c, char	*ref)
 	return (0);
 }
 
-static void		ft_options(char c, t_flag *flags)
+static void	ft_options(char c, t_flag *flags)
 {
 	if (c == 'a')
 		flags->a = 1;
@@ -33,7 +47,7 @@ static void		ft_options(char c, t_flag *flags)
 	if (c == 'r')
 		flags->r = 1;
 	if (c == 'R')
-		flags->R = 1;
+		flags->rr = 1;
 	if (c == 't')
 		flags->t = 1;
 }
