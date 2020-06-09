@@ -6,7 +6,7 @@
 /*   By: rklein <rklein@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:15:11 by rklein            #+#    #+#             */
-/*   Updated: 2020/06/05 11:46:59 by rklein           ###   ########.fr       */
+/*   Updated: 2020/06/09 13:53:00 by rklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ static void	ft_permissions(char *perm, char *mode)
 static void	ft_set_perm(char *perm, char m)
 {
 	if (m == '4' || m == '5' || m == '6' || m == '7')
-		perm[2] = (perm[2] == '-') ? 'S' : 's';
+		perm[3] = (perm[3] == '-') ? 'S' : 's';
 	if (m == '2' || m == '3' || m == '6' || m == '7')
-		perm[5] = (perm[5] == '-') ? 'S' : 's';
+		perm[6] = (perm[6] == '-') ? 'S' : 's';
 	if (m == '1' || m == '3' || m == '5' || m == '7')
-		perm[8] = (perm[8] == '-') ? 'T' : 't';
+		perm[9] = (perm[9] == '-') ? 'T' : 't';
 }
 
 char		*ft_mode(char *mode)

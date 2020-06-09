@@ -6,7 +6,7 @@
 /*   By: rklein <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 14:08:14 by rklein            #+#    #+#             */
-/*   Updated: 2020/06/05 12:21:52 by rklein           ###   ########.fr       */
+/*   Updated: 2020/06/09 14:26:20 by rklein           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_path(char *path, char *file)
 	char	*tmp;
 
 	tmp = ft_strjoin(path, "/");
-	str = ft_strjoin(tmp, file);
+	str = ft_strcmp(path, "/") ? ft_strjoin(tmp, file) : ft_strjoin(path, file);
 	free(tmp);
 	return (str);
 }
