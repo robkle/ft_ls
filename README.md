@@ -10,5 +10,6 @@ The repository contains a Makefile for:<br />
 * recompiling (**make re**)<br /><br />
 
 The executable **ft_ls** is used the same way as **ls** Unix command, but only with -l, -R, -a, -r and -t options.<br />
+./ft_ls \[-Ralt\] \[file ...\]
 #### Notes:
 This project is part of my studies at Hive Helsinki. It was thoroughly tested by 5 fellow Hive students.
