@@ -9,6 +9,6 @@ The repository contains a Makefile for:<br />
 * compiling executable (**make all**)<br />
 * removing object files (**make clean**)<br />
 * deleting executable (**make fclean**)<br />
-* recompiling (**make re**)<br /><br />
+* recompiling (**make re**)<br />
 #### Notes:
 This project is part of my studies at Hive Helsinki. It was thoroughly tested by 5 fellow Hive students.
